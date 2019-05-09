@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 
-namespace StringCalculator
+namespace Tests
 {
-    public class Calculator
+    public class StringCalculator
     {
         public int answer { get; set; }
         private char delimiter { get; set; }
@@ -15,7 +15,7 @@ namespace StringCalculator
                 return;
             }
 
-            if (numbers.Length >= 3 && numbers.Substring(0, 2) == "//")
+            if (numbers.Length > 2 && numbers.Substring(0, 2) == "//")
             {
                 delimiter = numbers[2];
 
