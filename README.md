@@ -6,7 +6,7 @@ For the typescript katas I use this starter template found [here](https://github
 For the c++ katas I try to follow the google test frameworks guidlines found [here](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
 
 
-Documentation from the @ardakis's repo: 
+Documentation from the ardalis's repo: 
 
 Coding Kata Catalog
 ===================
