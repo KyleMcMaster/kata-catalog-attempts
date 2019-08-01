@@ -5,6 +5,10 @@ This repository contains [my](https://github.com/KyleMcMaster) implementations o
 For the typescript katas I use this starter template found [here](https://github.com/eyev/Typescript-Jest-Kata-Seed)
 For the c++ katas I try to follow the google test frameworks guidlines found [here](https://github.com/google/googletest/blob/master/googletest/docs/primer.md)
 
+# Kata Resources 
+
+Conway's Game of life Kata from [here](http://codingdojo.org/kata/GameOfLife/)
+
 
 Documentation from the ardalis's repo: 
 
