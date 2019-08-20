@@ -30,7 +30,27 @@ namespace Tests
 		sut.Add(second);
 
 		EXPECT_EQ(sut.Count(), 2);
-		EXPECT_EQ(sut.At(0), first);
-		EXPECT_EQ(sut.At(1), second);
+		EXPECT_EQ(sut.At(0), second);
+		EXPECT_EQ(sut.At(1), first);
+	}
+
+	TEST(MOST_RECENTLY_ADDED_ITEM_IS_FIRST_IN_LIST, RECENTLY_USED_LIST_TESTS) {
+		auto sut = Kata::RecentlyUsedList();
+		std::string value = "first";
+		sut.Add(value);
+
+		EXPECT_EQ(sut.Count(), 1);
+		EXPECT_EQ(sut.At(0), value);
+	}
+
+	TEST(MOST_RECENTLY_ADDED_ITEM_IS_FIRST_IN_LIST_WITH_TWO_ITEMS, RECENTLY_USED_LIST_TESTS) {
+		auto sut = Kata::RecentlyUsedList();
+		std::string first = "first";
+		std::string second = "second";
+		sut.Add(first);
+		sut.Add(second);
+
+		EXPECT_EQ(sut.Count(), 2);
+		EXPECT_EQ(sut.At(0), second);
 	}
 }

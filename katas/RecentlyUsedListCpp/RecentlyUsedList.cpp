@@ -19,8 +19,10 @@ namespace Kata
 		this->numContents++;
 		this->contents.push_back(item);
 	}
+
 	std::string RecentlyUsedList::At(int i)
 	{
-		return this->contents.at(i);
+		int end = this->contents.size() - 1;
+		return this->contents.at(end - i);
 	}
 }
