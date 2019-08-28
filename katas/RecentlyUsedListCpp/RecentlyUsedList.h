@@ -8,12 +8,12 @@ namespace Kata
 	{
 	public:
 		RecentlyUsedList();
-		int Count();
 		void Add(std::string item);
 		std::string At(int i);
+		int Count();
 	private:
-		int numContents;
 		std::vector<std::string> contents;
+		int numContents;
 	};
 }
 
