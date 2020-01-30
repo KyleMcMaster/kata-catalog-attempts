@@ -14,6 +14,5 @@ namespace Kata.Starter
             Date = date;
             NumberOfDiners = numberOfDiners;
         }
-
     }
 }

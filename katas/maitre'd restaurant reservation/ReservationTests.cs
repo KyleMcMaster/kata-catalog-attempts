@@ -1,8 +1,5 @@
 ﻿using FluentAssertions;
 using Kata.Starter.Fixtures;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using Xunit;
 
 namespace Kata.Starter

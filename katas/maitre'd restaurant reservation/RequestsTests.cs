@@ -1,5 +1,4 @@
 using FluentAssertions;
-using Kata.Starter.Fixtures;
 using System;
 using Xunit;
 
@@ -26,14 +25,6 @@ namespace Kata.Starter
             sut.Name.Should().Be(defaultName);
             sut.Date.Should().Be(defaultDate);
             sut.NumberOfDiners.Should().Be(defaultNumberOfDiners);
-        }
-
-        [Theory, AutoDomainData]
-        public void Constructor_Assigns_Fields_Using_Supplied_Value(string message)
-        {
-            var sut = new Request(message);
-
-            sut.Message.Should().Be(message);
         }
     }
 }

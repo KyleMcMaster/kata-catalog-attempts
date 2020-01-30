@@ -1,9 +1,7 @@
 ﻿using LanguageExt;
-using static LanguageExt.Prelude;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using static LanguageExt.Prelude;
 
 namespace Kata.Starter
 {
@@ -16,6 +14,7 @@ namespace Kata.Starter
         public Restaurant(int capacity)
         {
             this.Capacity = capacity;
+            this.AcceptedReservations = new List<Reservation>();
         }
 
         public Option<Reservation> ProcessRequest(Request request)
