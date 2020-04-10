@@ -19,11 +19,6 @@ namespace Kata.Starter
 
         }
 
-        public void AddSurvivor(Survivor survivor)
-        {
-            Survivors.Add(survivor);
-        }
-
-
+        public void AddSurvivor(Survivor survivor) => Survivors.Add(survivor);
     }
 }

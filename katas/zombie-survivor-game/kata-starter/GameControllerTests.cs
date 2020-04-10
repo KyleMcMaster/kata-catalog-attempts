@@ -1,4 +1,6 @@
-﻿namespace Kata.Starter
+﻿using Xunit;
+
+namespace Kata.Starter
 {
     public class GameControllerTests
     {
