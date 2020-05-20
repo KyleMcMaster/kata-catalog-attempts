@@ -1,4 +1,5 @@
-﻿using FluentAssertions;
+﻿using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace Kata.Starter
@@ -119,6 +120,22 @@ namespace Kata.Starter
             sut.KillZombie(firstSurvivor, 43);
 
             firstSurvivor.CurrentLevel.Should().Be("Red");
+        }
+
+        [Fact]
+        public void Game_History_Notes_A_Suvivor_Has_Been_Added_To_Game()
+        {
+            sut = new GameController();
+
+            var newSurvivor = new Survivor("Kyle");
+
+            sut.AddSurvivor(newSurvivor);
+
+            var addSurvivorEvent = sut.History.Events.FirstOrDefault(e => e.EntityId == "Kyle");
+
+            addSurvivorEvent.EntityId.Should().Be("Kyle");
+            addSurvivorEvent.EntityType.Should().Be(nameof(Survivor));
+            addSurvivorEvent.Message.Should().Be("ADDED_TO_GAME");
         }
     }
 }

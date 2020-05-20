@@ -10,8 +10,11 @@ namespace Kata.Starter
         public string CurrentLevel { get; set; } = "Blue";
         public List<Survivor> Survivors { get; set; }
 
+        public History History { get; }
+
         public GameController()
         {
+            History = new History(DateTimeOffset.UtcNow);
             Survivors = new List<Survivor>();
         }
 
@@ -23,6 +26,7 @@ namespace Kata.Starter
             }
 
             Survivors.Add(survivor);
+            History.LogEvent(new HistoryEvent(survivor.Name, nameof(Survivor), "ADDED_TO_GAME"));
         }
 
         public int GetSurvivors()
@@ -60,7 +64,9 @@ namespace Kata.Starter
 
         public void SetGameLevel()
         {
-            this.CurrentLevel = Survivors.OrderByDescending(s => s.Experience).Where(s => s.Status != "DEAD").FirstOrDefault().CurrentLevel;
+            this.CurrentLevel = Survivors.OrderByDescending(s => s.Experience)
+                .Where(s => s.Status != "DEAD")
+                .FirstOrDefault().CurrentLevel;
         }
     }
 }

@@ -6,21 +6,21 @@ namespace Kata.Starter
 {
     public class Survivor
     {
+        public string CurrentLevel { get; set; } = "Blue";
+        public int Experience { get; set; } = 0;
         public int MaxActions { get; set; } = 3;
+        public int MaxEquipment { get; set; } = 5;
+        private const int MAX_IN_HAND_EQUIPMENT = 2;
         public string Name { get; }
         public string Status { get; set; }
         public int Wounds { get; protected set; }
 
-        public int MaxEquipment { get; set; } = 5;
-        private const int MAX_IN_HAND_EQUIPMENT = 2;
-
         public List<Equipment> Equipment { get; set; } = new List<Equipment>();
 
-        public int Experience { get; set; } = 0;
-
-        public string CurrentLevel { get; set; } = "Blue";
-
-        public Survivor(string name) => Name = name;
+        public Survivor(string name)
+        {
+            Name = name;
+        }
 
         public void ReceiveWound(int numberOfWounds)
         {
