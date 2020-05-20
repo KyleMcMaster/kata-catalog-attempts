@@ -46,5 +46,79 @@ namespace Kata.Starter
 
             sut.Survivors.Count.Should().Be(2);
         }
+
+        [Fact]
+        public void Game_Level_Begins_At_Level_Blue()
+        {
+            sut = new GameController();
+
+            sut.CurrentLevel.Should().Be("Blue");
+        }
+
+        [Fact]
+        public void Game_Level_Equals_Highest_Living_Survivor_Level()
+        {
+            sut = new GameController();
+
+            var firstSurvivor = new Survivor("Kyle");
+            var secondSurvivor = new Survivor("Nathan");
+
+            sut.AddSurvivor(firstSurvivor);
+            sut.AddSurvivor(secondSurvivor);
+
+            sut.KillZombie(firstSurvivor, 1);
+            sut.KillZombie(secondSurvivor, 8);
+
+            sut.CurrentLevel.Should().Be("Yellow");
+        }
+
+        [Fact]
+        public void Survivor_Should_Gain_One_Experience_When_They_Kill_A_Zombie()
+        {
+            sut = new GameController();
+            var firstSurvivor = new Survivor("Kyle");
+            sut.AddSurvivor(firstSurvivor);
+            int expectedExperience = firstSurvivor.Experience + 1;
+
+            sut.KillZombie(firstSurvivor, 1);
+
+            firstSurvivor.Experience.Should().Be(expectedExperience);
+        }
+
+        [Fact]
+        public void Survivor_Exceeds_Six_Experience_Should_Advance_To_Yellow()
+        {
+            sut = new GameController();
+            var firstSurvivor = new Survivor("Kyle");
+            sut.AddSurvivor(firstSurvivor);
+
+            sut.KillZombie(firstSurvivor, 7);
+
+            firstSurvivor.CurrentLevel.Should().Be("Yellow");
+        }
+
+        [Fact]
+        public void Survivor_Exceeds_Eighteen_Experience_Should_Advance_To_Orange()
+        {
+            sut = new GameController();
+            var firstSurvivor = new Survivor("Kyle");
+            sut.AddSurvivor(firstSurvivor);
+
+            sut.KillZombie(firstSurvivor, 19);
+
+            firstSurvivor.CurrentLevel.Should().Be("Orange");
+        }
+
+        [Fact]
+        public void Survivor_Exceeds_FortyTwo_Experience_Should_Advance_To_Red()
+        {
+            sut = new GameController();
+            var firstSurvivor = new Survivor("Kyle");
+            sut.AddSurvivor(firstSurvivor);
+
+            sut.KillZombie(firstSurvivor, 43);
+
+            firstSurvivor.CurrentLevel.Should().Be("Red");
+        }
     }
 }

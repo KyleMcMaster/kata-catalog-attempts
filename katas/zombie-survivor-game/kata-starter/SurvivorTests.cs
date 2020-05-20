@@ -53,7 +53,7 @@ namespace Kata.Starter
         }
 
         [Theory, AutoDomainData]
-        public void Additional_Wounds_After_2_Are_Ignored(uint additionalWounds)
+        public void Additional_Wounds_After_2_Are_Ignored(int additionalWounds)
         {
             var sut = new Survivor(Name);
 
@@ -131,7 +131,7 @@ namespace Kata.Starter
             sut.AddEquipment(new Equipment("Gary", "InReserve"));
             sut.AddEquipment(new Equipment("Jonathan", "InReserve"));
 
-            int inHandCount = sut.Equipment.Count(e=> e.Type == "InHand");
+            int inHandCount = sut.Equipment.Count(e => e.Type == "InHand");
             int inReserveCount = sut.Equipment.Count(e => e.Type == "InReserve");
 
             inHandCount.Should().Be(2);
@@ -156,7 +156,7 @@ namespace Kata.Starter
 
         [Theory]
         [InlineData(1)]
-        public void Survivor_With_One_Wound_Can_Only_Carry_Four_Equipment(uint numberOfWounds)
+        public void Survivor_With_One_Wound_Can_Only_Carry_Four_Equipment(int numberOfWounds)
         {
             var sut = new Survivor(Name);
 
@@ -169,6 +169,22 @@ namespace Kata.Starter
             sut.ReceiveWound(numberOfWounds);
 
             sut.Equipment.Count.Should().Be(4);
+        }
+
+        [Fact]
+        public void Survivor_Begins_With_Zero_Experience()
+        {
+            var sut = new Survivor(Name);
+
+            sut.Experience.Should().Be(0);
+        }
+
+        [Fact]
+        public void Survivor_Begins_At_Level_Blue()
+        {
+            var sut = new Survivor(Name);
+
+            sut.CurrentLevel.Should().Be("Blue");
         }
     }
 }
