@@ -23,7 +23,7 @@ namespace Kata.Starter
         {
             var sut = new Game();
 
-            sut.Roll(testData);
+            sut.Roll();
 
             sut.DiceValues.Any(dv => dv != 0).Should().BeTrue();
         }
@@ -34,8 +34,28 @@ namespace Kata.Starter
         {
             var sut = new Game();
 
-            sut.Roll(testData);
-            sut.Score().Should().Be(350);
+            sut.Roll();
+            sut.Score(testData).Should().Be(350);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 4, 0, 0, 0, 1, 0 })]
+        public void Roll_With_11151_Produces_Score_Of_1150(int[] testData)
+        {
+            var sut = new Game();
+
+            sut.Roll();
+            sut.Score(testData).Should().Be(1150);
+        }
+
+        [Theory]
+        [InlineData(new int[] { 0, 2, 1, 1, 0, 5 })]
+        public void Roll_With_23462_Produces_Score_Of_0(int[] testData)
+        {
+            var sut = new Game();
+
+            sut.Roll();
+            sut.Score(testData).Should().Be(0);
         }
     }
 }

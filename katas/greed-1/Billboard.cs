@@ -1,7 +1,4 @@
-﻿using System.Linq.Expressions;
-using Ardalis.GuardClauses;
-using System;
-using System.Linq;
+﻿using System;
 
 namespace Kata.Starter
 {
@@ -9,50 +6,39 @@ namespace Kata.Starter
     {
         public int[] DiceValues { get; protected set; } = new int[6] { 0, 0, 0, 0, 0, 0 };
 
-        public void Roll(int[] testdata = null)
+        public void Roll()
         {
-            if (testdata == null)
-            {
-                var rnd = new Random();
+            var rnd = new Random();
 
-                for (int i = 0; i < 6; i++)
-                {
-                    var dieValue = rnd.Next(0, 6);
-                    DiceValues[dieValue] = DiceValues[dieValue] + 1;
-                }
+            for (int i = 0; i < 5; i++)
+            {
+                var dieValue = rnd.Next(0, 6);
+                DiceValues[dieValue] = DiceValues[dieValue] + 1;
             }
-            else
+        }
+
+        public int Score(int[] testdata = null)
+        {
+            if (testdata != null)
             {
                 DiceValues = testdata;
             }
 
-            // Array.Sort(DiceValues);
-            // Array.Reverse(DiceValues);
-        }
-
-        public int Score()
-        {
-
-            //here's an ugly way - 
-            //  List<int> indexesInvolved = new List<int>();
-            //  var resultArray = DiceValues.Where((item, index) =>
-            //      { 
-            //          if (item >= 3) {
-            //              indexesInvolved.Add(index);
-            //             return true;
-            //          } 
-            //          else {
-            //             return false;
-            //          } 
-            //      }
-            // ).ToArray();
-            // var foundIndexArray = indexesInvolved.ToArray();
-
             int score = 0;
-            int index = Array.IndexOf(DiceValues, 3);
+            int index = -1;
+            int numberOfOccurences = 6;
+
+            while (index == -1 && numberOfOccurences >= 3)
+            {
+                index = Array.IndexOf(DiceValues, numberOfOccurences);
+                numberOfOccurences--;
+            }
 
             switch (index)
             {
+                case 0:
+                    score += 1000;
+                    break;
                 case 2:
                     score += 300;
                     break;
@@ -60,7 +46,22 @@ namespace Kata.Starter
                     break;
             }
 
-            return 0;
+            if (DiceValues[0] % 3 == 1)
+            {
+                score += 100;
+            }
+
+            // if (DiceValues[1] % 2 == 1)
+            // {
+            //     score += 100;
+            // }
+
+            if (DiceValues[4] % 3 == 1)
+            {
+                score += 50;
+            }
+
+            return score;
         }
     }
 }
