@@ -13,11 +13,12 @@ namespace hangman
         public List<char> CorrectGuesses { get; }
         public List<char> IncorrectGuesses { get; }
         private List<char> validCharacters { get; }
+
         public Hangman(string secretWord, int maxIncorrectGuesses)
         {
-            this.MaxIncorrectGuesses = maxIncorrectGuesses;
-            this.SecretWord = secretWord.ToUpper();
-            this.GameStateSecretWord = secretWord.ToUpper();
+            MaxIncorrectGuesses = maxIncorrectGuesses;
+            SecretWord = secretWord.ToUpper();
+            GameStateSecretWord = SecretWord;
 
             validCharacters = new("ABCDEFGHIJKLMNOPQRSTUVWXYZ".ToCharArray(0, 26));
             IncorrectGuesses = new();
