@@ -16,10 +16,7 @@
     {
         public string Status { get; }
 
-        private EquipmentStatus(string status)
-        {
-            Status = status;
-        }
+        private EquipmentStatus(string status) => Status = status;
 
         public static EquipmentStatus IN_HAND = new EquipmentStatus(nameof(IN_HAND));
         public static EquipmentStatus IN_RESERVE = new EquipmentStatus(nameof(IN_RESERVE));
