@@ -1,5 +1,4 @@
-﻿using Ardalis.GuardClauses;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -22,9 +21,6 @@ namespace Kata.Starter
             string name, 
             int wounds)
         {
-            Guard.Against.OutOfRange(equipment.Count(), nameof(equipment), 0, MAX_EQUIPMENT_COUNT - Wounds);
-            Guard.Against.OutOfRange(equipment.Where(e => e.Status == EquipmentStatus.IN_HAND).Count(), nameof(equipment), 0, 2);
-
             Equipment = equipment;
             Experience = experience;
             Name = name;
@@ -35,17 +31,48 @@ namespace Kata.Starter
         {
             int wounds = Math.Min(Wounds + 1, 2);
 
+            int newEquipmentCount = MAX_EQUIPMENT_COUNT - wounds;
+
             return new Survivor(
-                equipment: Equipment.Take(MAX_EQUIPMENT_COUNT-wounds),
+                equipment: Equipment.Take(newEquipmentCount),
                 experience: Experience,
                 name: Name, 
                 wounds: wounds);
         }
 
-        public static Survivor CreateNew(IEnumerable<Equipment> equipment, string name) => new Survivor(
-            equipment: equipment, 
-            experience: 0, 
-            name: name, 
-            wounds: 0);
+        public Survivor AddEquipment(Equipment equipment)
+        {
+            int inHandEquipmentCount = Equipment.Count(e => e.Status == EquipmentStatus.IN_HAND);
+
+            if (inHandEquipmentCount >= 2 && equipment.Status == EquipmentStatus.IN_HAND)
+            {
+                throw new ArgumentException("Survivor already has two equipment in hand");
+            }
+
+            if (Equipment.Count() > (MAX_EQUIPMENT_COUNT - Wounds))
+            {
+                throw new ArgumentException("Survivor already holding maximum equipment");
+            }
+
+            var equipmentToAdd = Equipment.Union(new[] { equipment });
+
+            return new Survivor(
+                equipment: equipmentToAdd,
+                experience: Experience,
+                name: Name,
+                wounds: Wounds);
+        }
+
+        public Survivor KillZombie() =>
+            new (equipment: Equipment,
+                experience: Experience + 1,
+                name: Name,
+                wounds: Wounds);
+
+        public static Survivor CreateNew(string name) => 
+            new (equipment: Enumerable.Empty<Equipment>(), 
+                experience: 0, 
+                name: name, 
+                wounds: 0);
     }
 }

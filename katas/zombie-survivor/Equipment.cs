@@ -1,4 +1,6 @@
-﻿namespace Kata.Starter
+﻿using System;
+
+namespace Kata.Starter
 {
     public class Equipment
     {
