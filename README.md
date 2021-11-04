@@ -1,6 +1,6 @@
 Kata Catalog
 ====
-This repository contains [my](https://github.com/KyleMcMaster) implementations of various katas from [ardalis/kata-catalog](https://github.com/ardalis/kata-catalog)
+This repository contains implementations of various katas from [ardalis/kata-catalog](https://github.com/ardalis/kata-catalog)
 
 ## Templates and starters
 
